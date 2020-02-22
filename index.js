@@ -2,6 +2,9 @@
 import './style.css';
 // Firebase App (the core Firebase SDK) is always required and must be listed first
 import * as firebase from "firebase/app";
+import * as firebaseAnalytics from "firebase/analytics"
+// <script src="https://www.gstatic.com/firebasejs/7.9.1/firebase-analytics.js"></script>
+
 
 // Add the Firebase products that you want to use
 import "firebase/auth";
@@ -24,9 +27,19 @@ var rsvpListener = null;
 var guestbookListener = null;
 
 // Add Firebase project configuration object here
-// var firebaseConfig = {};
-
-// firebase.initializeApp(firebaseConfig);
+var firebaseConfig = {
+    apiKey: "AIzaSyBB4VuGEcOxgdyYtUxfwilQzZ3iIhSTyTQ",
+    authDomain: "fir-webcodelab-d659a.firebaseapp.com",
+    databaseURL: "https://fir-webcodelab-d659a.firebaseio.com",
+    projectId: "fir-webcodelab-d659a",
+    storageBucket: "fir-webcodelab-d659a.appspot.com",
+    messagingSenderId: "593509287760",
+    appId: "1:593509287760:web:1582d5299aa05ebe3c4e55",
+    measurementId: "G-H3JHPCYLK0"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  // firebase.analytics();
 
 // FirebaseUI config
 const uiConfig = {
@@ -44,4 +57,11 @@ const uiConfig = {
   }
 };
 
-// const ui = new firebaseui.auth.AuthUI(firebase.auth());
+// ...
+// Initialize the FirebaseUI widget using Firebase
+const ui = new firebaseui.auth.AuthUI(firebase.auth());
+
+startRsvpButton.addEventListener("click",
+ () => {
+      ui.start("#firebaseui-auth-container", uiConfig);
+});
